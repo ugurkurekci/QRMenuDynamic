@@ -31,8 +31,8 @@ public class ExceptionHandlingMiddleware
 
             var errorResponse = new
             {
-                Message = "An unexpected error occurred. Please try again later.",
-                Detail = ex.Message
+                ex.Message,
+                InnerException = ex.InnerException?.Message
             };
 
             await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));

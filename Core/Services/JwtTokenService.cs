@@ -1,4 +1,5 @@
 ﻿using Core.Configurations;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -6,24 +7,25 @@ using System.Text;
 
 namespace Core.Services;
 
-public class JwtTokenService
+public class JwtTokenService : IJwtTokenService
 {
+
     private readonly JwtSettings _jwtSettings;
 
-    public JwtTokenService(JwtSettings jwtSettings)
+    public JwtTokenService(IOptions<JwtSettings> jwtSettings)
     {
-        _jwtSettings = jwtSettings;
+        _jwtSettings = jwtSettings.Value;
     }
 
-    public string GenerateToken(string userId, string userEmail, string userRole)
+    public string GenerateToken(int userId, string userEmail, int roleId)
     {
         var claims = new[]
         {
-                new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.Email, userEmail),
-                new Claim(ClaimTypes.Role, userRole),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
+            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+            new Claim(JwtRegisteredClaimNames.Email, userEmail),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(ClaimTypes.Role, roleId.ToString())
+        };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -31,7 +33,7 @@ public class JwtTokenService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(claims),
-            Expires = DateTime.Now.AddMinutes(_jwtSettings.TokenExpirationMinutes),
+            Expires = DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpirationMinutes),
             Issuer = _jwtSettings.Issuer,
             Audience = _jwtSettings.Audience,
             SigningCredentials = credentials

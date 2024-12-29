@@ -1,4 +1,5 @@
-﻿using Core.Services;
+﻿using Application.Services;
+using Core.Services;
 using Domain.Data;
 using Domain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +11,16 @@ public static class ServiceExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
+        services.AddScoped<IJwtTokenService,JwtTokenService>();
+
         services.AddScoped<JwtTokenService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
         services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(typeof(IAssemblyMarker).Assembly);
         });
+
+        services.AddScoped<IAuthService, AuthService>();
 
 
         return services;
@@ -24,6 +29,9 @@ public static class ServiceExtensions
     public static IServiceCollection AddDomains(this IServiceCollection services)
     {
         services.AddScoped<IRoleRepository, RoleRepository>();
+        services.AddScoped<IBusinessRepository, BusinessRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
+
         services.AddDbContext<AppDbContext>();
 
         return services;

@@ -8,10 +8,8 @@ public static class ConfigurationExtensions
 {
     public static IServiceCollection AddConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = new JwtSettings();
-        configuration.GetSection("JwtSettings").Bind(jwtSettings);
-        services.AddSingleton(jwtSettings);
-
+      
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings").Bind);
         return services;
     }
 }
