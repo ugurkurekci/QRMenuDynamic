@@ -1,16 +1,17 @@
-﻿using Application.Configurations;
+﻿using Core.Configurations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Application.Middlewares;
+namespace Core.Middlewares;
 
 public class AuthenticationMiddleware
 {
-
     private readonly RequestDelegate _next;
     private readonly JwtSettings _jwtSettings;
 
@@ -22,13 +23,19 @@ public class AuthenticationMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var path = context.Request.Path.Value;
-
-        if (path.Contains("/index.html"))
+        if (context.Request.Path == "/index.html")
         {
             await _next(context);
             return;
         }
+
+        var endpoint = context.Features.Get<IEndpointFeature>()?.Endpoint;
+        if (endpoint?.Metadata?.GetMetadata<IAllowAnonymous>() != null)
+        {
+            await _next(context);
+            return;
+        }
+
         var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
         if (string.IsNullOrEmpty(token) || !ValidateToken(token, out var claimsPrincipal))
@@ -39,6 +46,7 @@ public class AuthenticationMiddleware
         }
 
         context.User = claimsPrincipal;
+
         await _next(context);
     }
 
@@ -68,5 +76,4 @@ public class AuthenticationMiddleware
             return false;
         }
     }
-
 }

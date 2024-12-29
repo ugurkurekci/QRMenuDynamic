@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 
-namespace Application.Middlewares;
+namespace Core.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {

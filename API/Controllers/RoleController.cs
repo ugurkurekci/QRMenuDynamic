@@ -1,6 +1,7 @@
 ﻿using Application.Commands;
 using Application.DTOs.Role;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -16,10 +17,10 @@ public class RoleController : BaseController
     }
 
     [HttpPost]
-    public async Task<ActionResult<int>> CreateRole(CreateRoleDto roleDto)
+    [AllowAnonymous]
+    public async Task<ActionResult<int>> CreateRole([FromBody] CreateRoleDto roleDto)
     {
-        var command = new CreateRoleCommand { RoleDto = roleDto };
-        return await _mediator.Send(command);
+        return Ok(await _mediator.Send(new CreateRoleCommand(roleDto)));
     }
 
 }

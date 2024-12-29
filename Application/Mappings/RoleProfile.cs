@@ -6,9 +6,12 @@ namespace Application.Mappings;
 
 public class RoleProfile : Profile
 {
+
     public RoleProfile()
     {
-        CreateMap<Role, CreateRoleDto>().ReverseMap();
+        CreateMap<CreateRoleDto, Role>()
+            .ForMember(x => x.CreatedAt, opt => opt.MapFrom(x => DateTime.Now))
+            .ForMember(x => x.IsDeleted, opt => opt.MapFrom(x => false));
     }
 
 }

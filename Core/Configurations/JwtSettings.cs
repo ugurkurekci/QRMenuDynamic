@@ -1,4 +1,4 @@
-﻿namespace Application.Configurations;
+﻿namespace Core.Configurations;
 
 public class JwtSettings
 {
@@ -8,6 +8,6 @@ public class JwtSettings
 
     public string Audience { get; set; }
 
-    public int ExpiryMinutes { get; set; }
+    public int TokenExpirationMinutes { get; set; }
 
 }

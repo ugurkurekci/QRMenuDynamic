@@ -9,6 +9,11 @@ namespace Application.Commands;
 public class CreateRoleCommand : IRequest<int>
 {
     public CreateRoleDto RoleDto { get; set; }
+
+    public CreateRoleCommand(CreateRoleDto roleDto)
+    {
+        RoleDto = roleDto;
+    }
 }
 
 public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, int>
@@ -25,7 +30,7 @@ public class CreateRoleCommandHandler : IRequestHandler<CreateRoleCommand, int>
 
     public async Task<int> Handle(CreateRoleCommand request, CancellationToken cancellationToken)
     {
-        var role = _mapper.Map<Role>(request.RoleDto);
+        Role role = _mapper.Map<Role>(request.RoleDto);
         return await _roleRepository.Add(role);
     }
 
