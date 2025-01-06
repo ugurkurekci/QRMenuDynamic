@@ -23,7 +23,6 @@ public class AuthenticationMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-
         if (context.Request.Path == "/index.html")
         {
             await _next(context);

@@ -9,5 +9,4 @@ public class JwtSettings
     public string Audience { get; set; }
 
     public int TokenExpirationMinutes { get; set; }
-
 }

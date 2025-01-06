@@ -1,14 +1,12 @@
 ﻿using Domain.Entities;
 
-namespace Domain.Repositories;
+namespace Domain.Repositories.Interfaces;
 
 public interface IBusinessRepository
 {
-
     Task<int> Add(Business business);
 
-    Task<Business> Get(int id);
+    Task<Business> GetById(int id);
 
     Task<List<Business>> GetAll();
-
 }

@@ -6,7 +6,6 @@ namespace Core.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {
-
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
 
@@ -38,5 +37,4 @@ public class ExceptionHandlingMiddleware
             await context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
     }
-
 }

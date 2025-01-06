@@ -4,8 +4,8 @@ namespace Core.Middlewares;
 
 public class SwaggerMiddleware
 {
-
     private readonly RequestDelegate _next;
+
     public SwaggerMiddleware(RequestDelegate next)
     {
         _next = next;
@@ -27,6 +27,4 @@ public class SwaggerMiddleware
         // diğer middleware'a devam et
         await _next(context);
     }
-
-
 }

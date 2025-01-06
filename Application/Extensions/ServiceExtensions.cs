@@ -2,6 +2,8 @@
 using Core.Services;
 using Domain.Data;
 using Domain.Repositories;
+using Domain.Repositories.Concrete;
+using Domain.Repositories.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -11,7 +13,7 @@ public static class ServiceExtensions
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
-        services.AddScoped<IJwtTokenService,JwtTokenService>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
 
         services.AddScoped<JwtTokenService>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -30,6 +32,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IBusinessRepository, BusinessRepository>();
+        services.AddScoped<ITableRepository, TableRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 
         services.AddDbContext<AppDbContext>();

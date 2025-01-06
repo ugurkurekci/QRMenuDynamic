@@ -9,7 +9,6 @@ namespace Core.Services;
 
 public class JwtTokenService : IJwtTokenService
 {
-
     private readonly JwtSettings _jwtSettings;
 
     public JwtTokenService(IOptions<JwtSettings> jwtSettings)

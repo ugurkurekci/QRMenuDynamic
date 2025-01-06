@@ -8,7 +8,6 @@ namespace API.Controllers;
 
 public class RoleController : BaseController
 {
-
     private readonly IMediator _mediator;
 
     public RoleController(IMediator mediator)
@@ -22,5 +21,4 @@ public class RoleController : BaseController
     {
         return Ok(await _mediator.Send(new CreateRoleCommand(roleDto)));
     }
-
 }

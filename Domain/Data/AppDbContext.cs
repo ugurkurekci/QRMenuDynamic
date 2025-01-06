@@ -6,13 +6,15 @@ namespace Domain.Data;
 
 public class AppDbContext : DbContext
 {
-
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
-
+    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    {
+    }
 
     public DbSet<Business> Business { get; set; }
 
     public DbSet<MenuItem> MenuItem { get; set; }
+
+    public DbSet<MenuCategory> MenuCategory { get; set; }
 
     public DbSet<Order> Order { get; set; }
 
@@ -36,5 +38,4 @@ public class AppDbContext : DbContext
             .Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
     }
-
 }

@@ -1,12 +1,12 @@
 ﻿using Domain.Data;
 using Domain.Entities;
+using Domain.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Repositories;
+namespace Domain.Repositories.Concrete;
 
 public class RoleRepository : IRoleRepository
 {
-
     private readonly AppDbContext _context;
 
     public RoleRepository(AppDbContext context)
@@ -25,5 +25,4 @@ public class RoleRepository : IRoleRepository
     {
         return await _context.Role.ToListAsync();
     }
-
 }

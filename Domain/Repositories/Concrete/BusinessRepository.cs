@@ -1,12 +1,12 @@
 ﻿using Domain.Data;
 using Domain.Entities;
+using Domain.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Repositories;
+namespace Domain.Repositories.Concrete;
 
 public class BusinessRepository : IBusinessRepository
 {
-
     private readonly AppDbContext _context;
 
     public BusinessRepository(AppDbContext context)
@@ -21,7 +21,7 @@ public class BusinessRepository : IBusinessRepository
         return entity.Entity.Id;
     }
 
-    public async Task<Business> Get(int id)
+    public async Task<Business> GetById(int id)
     {
         var result = await _context.Business.Where(x => x.Id == id).FirstOrDefaultAsync();
         if (result == null)

@@ -2,11 +2,10 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Domain.Repositories;
+namespace Domain.Repositories.Concrete;
 
 public class UserRepository : IUserRepository
 {
-
     private readonly AppDbContext _context;
 
     public UserRepository(AppDbContext context)
@@ -42,5 +41,4 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
         return entity.Entity.Id;
     }
-
 }

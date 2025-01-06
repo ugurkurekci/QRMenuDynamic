@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Domain.Repositories;
 using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection;
+using Domain.Repositories.Interfaces;
 
 namespace Application.Middleware;
 

@@ -5,9 +5,11 @@ namespace Domain.Entities;
 
 public class MenuItem
 {
-
     [Key]
     public int Id { get; set; }
+
+    [ForeignKey("MenuCategory")]
+    public int CategoryId { get; set; }
 
     [ForeignKey("Business")]
     public int BusinessId { get; set; }
@@ -26,6 +28,7 @@ public class MenuItem
 
     public Business Business { get; set; }
 
-    public ICollection<OrderDetail> OrderDetail { get; set; }
+    public MenuCategory MenuCategoryId { get; set; }
 
+    public ICollection<OrderDetail> OrderDetail { get; set; }
 }
