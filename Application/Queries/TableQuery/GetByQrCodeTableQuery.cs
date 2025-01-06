@@ -4,7 +4,7 @@ using Domain.Entities;
 using Domain.Repositories.Interfaces;
 using MediatR;
 
-namespace Application.Queries;
+namespace Application.Queries.TableQuery;
 
 public class GetByQrCodeTableQuery : IRequest<TableDto>
 {

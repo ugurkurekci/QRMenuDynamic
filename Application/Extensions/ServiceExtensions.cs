@@ -32,6 +32,7 @@ public static class ServiceExtensions
     {
         services.AddScoped<IRoleRepository, RoleRepository>();
         services.AddScoped<IBusinessRepository, BusinessRepository>();
+        services.AddScoped<IOrderStatusRepository, OrderStatusRepository>();
         services.AddScoped<ITableRepository, TableRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
 

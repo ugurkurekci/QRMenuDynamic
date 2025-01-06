@@ -4,7 +4,7 @@ using Domain.Entities;
 using Domain.Repositories.Interfaces;
 using MediatR;
 
-namespace Application.Commands;
+namespace Application.Commands.BusinessCommand;
 
 public class CreateBusinessCommand : IRequest<int>
 {

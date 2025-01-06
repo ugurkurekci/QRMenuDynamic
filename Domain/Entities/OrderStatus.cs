@@ -6,8 +6,9 @@ public class OrderStatus
 
     public string Name { get; set; }
 
+    public string Description { get; set; }
+
     public ICollection<Order> Order { get; set; }
 
     public ICollection<OrderHandler> OrderHandler { get; set; }
-
 }

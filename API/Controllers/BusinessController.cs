@@ -1,7 +1,7 @@
-﻿using Application.Commands;
+﻿using Application.Commands.BusinessCommand;
 using Application.DTOs.Business;
 using Application.Middleware;
-using Application.Queries;
+using Application.Queries.BusinessQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

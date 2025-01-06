@@ -1,6 +1,6 @@
-﻿using Application.Commands;
+﻿using Application.Commands.TableCommand;
 using Application.DTOs.Table;
-using Application.Queries;
+using Application.Queries.TableQuery;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
