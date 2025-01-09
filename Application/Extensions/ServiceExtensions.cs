@@ -24,7 +24,6 @@ public static class ServiceExtensions
 
         services.AddScoped<IAuthService, AuthService>();
 
-
         return services;
     }
 
@@ -35,10 +34,13 @@ public static class ServiceExtensions
         services.AddScoped<IOrderStatusRepository, OrderStatusRepository>();
         services.AddScoped<ITableRepository, TableRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IOrderHandlerRepository, OrderHandlerRepository>();
+        services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+        services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IMenuCategoryRepository, MenuCategoryRepository>();
 
         services.AddDbContext<AppDbContext>();
 
         return services;
     }
-
 }
